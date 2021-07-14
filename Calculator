@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+</head>
+<body>
+
+    <div id="main"> 
+        
+        <h1>Mel's Calculator</h1>
+        <style id="main">
+             #main
+            {
+                color: black;
+                width:  245px;
+                height: 300px;
+                margin: 0 auto;
+            }
+
+            #result
+            {
+                width: 100%;
+                height: 60px;
+                background: navy;
+                font-size: 40px;
+            }
+
+             #numbers
+            {
+                background: grey;
+                width: 185px;
+                height: 235px;
+                float: left;
+            }
+
+            #numbers .number
+            {
+                width: 50px;
+                height: 50px;
+                border: 1x black;
+                background:whitesmoke;
+                border-radius: 4px;
+                margin: 4px;
+            }
+
+            #operators
+            {
+                width: 60px;
+                height: 234px;
+                background: grey;
+                float: right;
+                
+            }
+
+            #operators .operator
+            {
+                width: 50px;
+                height: 50px;
+                background: whitesmoke;
+                border: 1x;
+                border-radius: 4px;
+                margin: 4px;
+
+            }
+            
+            #equation
+            {
+                width: 173px !important;
+            }
+
+            .clear
+            {
+                clear: both;
+            }
+
+            #resultOperators
+            {
+                background: grey    
+            }
+
+            #resultOperators .resultOperator
+            {
+                width: 50px;
+                height: 50px;
+                background: whitesmoke;
+                border: 1x;
+                border-radius: 4px;
+                margin: 4px;
+            }
+
+
+.rgb {
+    color: orangered;
+    -webkit-animation: rgbAnimation 3s alternate infinite;
+    transition: all 2s ease;
+    
+}
+
+@-webkit-keyframes rgbAnimation {
+
+0% {
+    background: palegreen;
+}
+50% {
+    background: plum;
+}
+100% {
+    background: powderblue;
+}
+}
+
+        </style>  
+
+<script>
+    window.onload = function () {
+
+        var selectedOperator = '';
+        var leftPart = '';
+        var rightPart = '';
+
+
+        var numbers = document.querySelectorAll(".number");
+        for (var i=0; i<numbers.length; i++) {
+            numbers[i].addEventListener("click", function() {
+
+
+                document.getElementById('result').innerHTML += this.value;
+
+                
+                if (selectedOperator=='') {
+                leftPart += this.value;
+                //alert(leftPart);                                                  comment row
+                }
+
+
+                else if (selectedOperator!='') {
+                rightPart += this.value;
+                //alert(rightPart);                                                 comment row
+                }
+
+                
+                
+            },false);
+        }
+
+
+        var operators = document.querySelectorAll(".operator");
+        for (var i=0; i<operators.length; i++) {
+            operators[i].addEventListener("click", function() {
+
+                document.getElementById('result').innerHTML += this.value;
+
+                selectedOperator = this.value;
+                
+            },false);
+        }
+
+        document.getElementById("equation").addEventListener("click", function() {
+        
+
+        if(selectedOperator=='+'){
+            document.getElementById('result').innerHTML = parseInt(leftPart) + parseInt(rightPart); 
+            //parseInt: the code describe like integer
+
+        }
+
+        else if(selectedOperator=='-'){
+            document.getElementById('result').innerHTML = parseInt(leftPart) - parseInt(rightPart); 
+        }
+
+
+        else if(selectedOperator=='*'){
+            document.getElementById('result').innerHTML = parseInt(leftPart) * parseInt(rightPart); 
+        }
+
+
+        else if(selectedOperator=='/'){
+            document.getElementById('result').innerHTML = parseInt(leftPart) / parseInt(rightPart); 
+        }
+
+       
+    }, false);
+
+        document.getElementById("delete").addEventListener("click", function() {
+
+        selectedOperator = '';
+        leftPart = '';
+        rightPart = '';
+
+        document.getElementById('result').innerHTML = '';
+
+    }, false);
+
+    
+
+    };
+</script>
+
+ 
+
+        <div id="result">
+
+        </div>
+        <div id="numbers">
+         <button value="7" class="number rgb">7</button>   
+         <button value="8" class="number rgb">8</button>   
+         <button value="9" class="number rgb">9</button>   
+         <button value="4" class="number rgb">4</button>   
+         <button value="5" class="number rgb">5</button>   
+         <button value="6" class="number rgb">6</button>   
+         <button value="1" class="number rgb">1</button>   
+         <button value="2" class="number rgb">2</button>   
+         <button value="3" class="number rgb">3</button>   
+         <button value="0" class="number rgb">0</button>   
+         <button id="dot" class="number  rgb">.</button>   
+         </div>
+
+         <div id="operators">
+            <button value="+"   class="operator">+</button>
+            <button value="-"   class="operator">-</button>
+            <button value="*"   class="operator">x</button>
+            <button value="/"   class="operator">/</button>     
+         </div>
+
+         <div class="clear"></div>
+
+         <div id="resultOperators">
+            <button  class="resultOperator" id="equation">=</button>
+            <button  class="resultOperator" id="delete">AC</button>   
+         </div>
+
+    </div>
+    
+</body>
+</html>
